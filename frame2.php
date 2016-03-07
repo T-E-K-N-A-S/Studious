@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<?php
+
+
+
+echo "<frameset rows='30%,*'>
+  <frame src='menu2.php?semester=9&bra=cse' noresize='noresize'>
+  <frame name='frame2' src='message.php' noresize='noresize'>
+  
+</frameset>";
+?>
+</html>
