@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+ <h1>Upload Study Material</h1> 
+<br><br><br>
+<h3>File was not uploaded due to some error</h3>
+
+<h4>click <a href="uloadform.php">here</a> to try again.</h4>
+ </body>
+</html>

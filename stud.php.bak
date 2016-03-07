@@ -1,0 +1,74 @@
+<html>
+<body>
+<?php
+
+
+	// Check if session is not registered, redirect back to main page. 
+	session_start();
+	if(!isset($_SESSION['enroll'])) {
+	header("location:home.php");
+	}
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db="project";
+// Create connection
+$conn = new mysqli($servername, $username, $password,$db);
+// GREETINGS
+$sesenroll=$_SESSION['enroll'];
+
+$subcode=$_GET['subcode'];
+if ($conn->connect_error) {
+    die("Connection failed: ". $conn->mysqli_connect_error);
+} 
+
+//echo $subject;
+//query
+$randomfuck = "SELECT * FROM main WHERE SUBCODE LIKE '$subcode' ";
+//echo $randomfuck ;
+$res=$conn->query($randomfuck);
+//echo var_dump($res);
+if($res->num_rows >0)
+{ echo"<table style='width:100%'><tr><td><b>TOPIC</b></td>
+<!-- <td><b>SEMESTER</b></td> -->
+<td><b>TUTOR</b></td>
+<td><b>DESCRIPTION</b></td>
+<td><b>L/T</b></td>
+</tr>
+</table>";
+while($row=$res->fetch_assoc())
+{$title=$row["TOPIC"];
+$top=$row["TOPIC"];
+//$sem=$row["SEMESTER"];
+//$subcode=$row["SUBCODE"];
+$tutor=$row["TUTOR"];
+$description=$row["description"];
+$dat=$row["uploaded_date"];
+//$lt=$row["LT"];
+$style2="width:100%";
+
+
+echo " <table style='width:100%' border='0'>
+<tr>
+ <td>$top</td>
+<td>$tutor</td>
+<td>$description</td>
+<!-- <td>$dat</td> -->
+<td><a href='download.php?filename=$title'><img src='images.png'   alt='images.png'   style='width:30px;height:30px'></a></td>
+</tr>
+</table> ";
+
+}
+
+}
+else{
+echo "No data";
+}
+//<p><a href="https://www.google.com">TOPIC</a></p>
+$conn->close();
+
+
+?>
+
+</body>
+</html>

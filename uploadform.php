@@ -1,0 +1,73 @@
+
+ <!DOCTYPE html>
+<html>
+<body><?php
+
+
+	// Check if session is not registered, redirect back to main page. 
+	session_start();
+	if(!isset($_SESSION['enroll'])) {
+	header("location:home.php");
+	}
+?>
+<h1>Upload Study Material</h1>
+<br><br><br>
+<form action="upload.php" method="POST" enctype="multipart/form-data">
+    Select file to upload:
+    <h2><input type="file" name="fileToUpload" id="fileToUpload"></h2>
+Branch  cse<input type="radio" name="bra" value="cse">
+ece<input type="radio" name="bra" value="ece"><br>
+Semester<select name='semester' >
+  	<option value='1'>1</option>
+  	<option value='2'>2</option>
+	<option value='3'>3</option>
+	<option value='4'>4</option>
+	<option value='5'>5</option>
+	<option value='6'>6</option>
+	<option value='7'>7</option>
+	<option value='8'>8</option>
+               </select>
+<br>
+<!-- Subject<input type="text" name="sub"><br> -->
+<br><br>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db="project";
+// Create connection
+$conn = new mysqli($servername, $username, $password,$db);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: ". $conn->mysqli_connect_error);
+} 
+$q= "SELECT sub,subcode FROM subjects ";
+//echo"$q<br>";
+$result=$conn->query($q);
+//echo var_dump($result);
+
+if($result->num_rows > 0)
+{echo "<select name='subcode' >";
+	while($row=$result->fetch_assoc())
+	{$sub=$row["sub"];
+	  $subcode=$row["subcode"];
+	  
+	echo " <option value= $subcode >$sub.$subcode </option>";
+	}
+	
+	echo "</select>";
+}
+$conn->close();
+
+?>
+<br>
+Batch<input type="text" name="bat"><br>    
+Description<input type="text" name="desc" width="300px" height"300px"><br>    
+
+<input type="image" src="up.png" alt="submit" value="Upload Image" name="submit"
+height="70px" width="90">
+</form>
+
+ 
+</body>
+</html>
